@@ -1,3 +1,51 @@
+Resources
+Read or watch:
+
+args/kwargs
+JSON encoder and decoder
+unittest module
+Python test cheatsheet
+Learning Objectives
+At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
+
+General
+What is Unit testing and how to implement it in a large project
+How to serialize and deserialize a Class
+How to write and read a JSON file
+What is *args and how to use it
+What is **kwargs and how to use it
+How to handle named arguments in a function
+Copyright - Plagiarism
+You are tasked to come up with solutions for the tasks below yourself to meet with the above learning objectives.
+You will not be able to meet the objectives of this or any following project by copying and pasting someone else’s work.
+You are not allowed to publish any content of this project.
+Any form of plagiarism is strictly forbidden and will result in removal from the program.
+Requirements
+Python Scripts
+Allowed editors: vi, vim, emacs
+All your files will be interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
+All your files should end with a new line
+The first line of all your files should be exactly #!/usr/bin/python3
+A README.md file, at the root of the folder of the project, is mandatory
+Your code should use the pycodestyle (version 2.8.*)
+All your files must be executable
+The length of your files will be tested using wc
+All your modules should be documented: python3 -c 'print(__import__("my_module").__doc__)'
+All your classes should be documented: python3 -c 'print(__import__("my_module").MyClass.__doc__)'
+All your functions (inside and outside a class) should be documented: python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)'
+A documentation is not a simple word, it’s a real sentence explaining what’s the purpose of the module, class or method (the length of it will be verified)
+Python Unit Tests
+Allowed editors: vi, vim, emacs
+All your files should end with a new line
+All your test files should be inside a folder tests
+You have to use the unittest module
+All your test files should be python files (extension: .py)
+All your test files and folders should start with test_
+Your file organization in the tests folder should be the same as your project: ex: for models/base.py, unit tests must be in: tests/test_models/test_base.py
+All your tests should be executed by using this command: python3 -m unittest discover tests
+You can also test file by file by using this command: python3 -m unittest tests/test_models/test_base.py
+We strongly encourage you to work together on test cases so that you don’t miss any edge case
+Tasks
 0. If it's not tested it doesn't work
 mandatory
 All your files, classes and methods must be unit tested and be PEP 8 validated.
@@ -511,3 +559,342 @@ if __name__ == "__main__":
 
     s1 = Square(5)
     print(s1)
+
+    s1.update(10)
+    print(s1)
+
+    s1.update(1, 2)
+    print(s1)
+
+    s1.update(1, 2, 3)
+    print(s1)
+
+    s1.update(1, 2, 3, 4)
+    print(s1)
+
+    s1.update(x=12)
+    print(s1)
+
+    s1.update(size=7, y=1)
+    print(s1)
+
+    s1.update(size=7, id=89, y=1)
+    print(s1)
+
+guillaume@ubuntu:~/$ ./11-main.py
+[Square] (1) 0/0 - 5
+[Square] (10) 0/0 - 5
+[Square] (1) 0/0 - 2
+[Square] (1) 3/0 - 2
+[Square] (1) 3/4 - 2
+[Square] (1) 12/4 - 2
+[Square] (1) 12/1 - 7
+[Square] (89) 12/1 - 7
+guillaume@ubuntu:~/$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0C-python-almost_a_circle
+File: models/square.py
+ 
+13. Rectangle instance to dictionary representation
+mandatory
+Update the class Rectangle by adding the public method def to_dictionary(self): that returns the dictionary representation of a Rectangle:
+
+This dictionary must contain:
+
+id
+width
+height
+x
+y
+guillaume@ubuntu:~/$ cat 12-main.py
+#!/usr/bin/python3
+""" 12-main """
+from models.rectangle import Rectangle
+
+if __name__ == "__main__":
+
+    r1 = Rectangle(10, 2, 1, 9)
+    print(r1)
+    r1_dictionary = r1.to_dictionary()
+    print(r1_dictionary)
+    print(type(r1_dictionary))
+
+    r2 = Rectangle(1, 1)
+    print(r2)
+    r2.update(**r1_dictionary)
+    print(r2)
+    print(r1 == r2)
+
+guillaume@ubuntu:~/$ ./12-main.py
+[Rectangle] (1) 1/9 - 10/2
+{'x': 1, 'y': 9, 'id': 1, 'height': 2, 'width': 10}
+<class 'dict'>
+[Rectangle] (2) 0/0 - 1/1
+[Rectangle] (1) 1/9 - 10/2
+False
+guillaume@ubuntu:~/$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0C-python-almost_a_circle
+File: models/rectangle.py
+ 
+14. Square instance to dictionary representation
+mandatory
+Update the class Square by adding the public method def to_dictionary(self): that returns the dictionary representation of a Square:
+
+This dictionary must contain:
+
+id
+size
+x
+y
+guillaume@ubuntu:~/$ cat 13-main.py
+#!/usr/bin/python3
+""" 13-main """
+from models.square import Square
+
+if __name__ == "__main__":
+
+    s1 = Square(10, 2, 1)
+    print(s1)
+    s1_dictionary = s1.to_dictionary()
+    print(s1_dictionary)
+    print(type(s1_dictionary))
+
+    s2 = Square(1, 1)
+    print(s2)
+    s2.update(**s1_dictionary)
+    print(s2)
+    print(s1 == s2)
+
+guillaume@ubuntu:~/$ ./13-main.py
+[Square] (1) 2/1 - 10
+{'id': 1, 'x': 2, 'size': 10, 'y': 1}
+<class 'dict'>
+[Square] (2) 1/0 - 1
+[Square] (1) 2/1 - 10
+False
+guillaume@ubuntu:~/$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0C-python-almost_a_circle
+File: models/square.py
+ 
+15. Dictionary to JSON string
+mandatory
+JSON is one of the standard formats for sharing data representation.
+
+Update the class Base by adding the static method def to_json_string(list_dictionaries): that returns the JSON string representation of list_dictionaries:
+
+list_dictionaries is a list of dictionaries
+If list_dictionaries is None or empty, return the string: "[]"
+Otherwise, return the JSON string representation of list_dictionaries
+guillaume@ubuntu:~/$ cat 14-main.py
+#!/usr/bin/python3
+""" 14-main """
+from models.base import Base
+from models.rectangle import Rectangle
+
+if __name__ == "__main__":
+
+    r1 = Rectangle(10, 7, 2, 8)
+    dictionary = r1.to_dictionary()
+    json_dictionary = Base.to_json_string([dictionary])
+    print(dictionary)
+    print(type(dictionary))
+    print(json_dictionary)
+    print(type(json_dictionary))
+
+guillaume@ubuntu:~/$ ./14-main.py
+{'x': 2, 'width': 10, 'id': 1, 'height': 7, 'y': 8}
+<class 'dict'>
+[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]
+<class 'str'>
+guillaume@ubuntu:~/$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0C-python-almost_a_circle
+File: models/base.py
+ 
+16. JSON string to file
+mandatory
+Update the class Base by adding the class method def save_to_file(cls, list_objs): that writes the JSON string representation of list_objs to a file:
+
+list_objs is a list of instances who inherits of Base - example: list of Rectangle or list of Square instances
+If list_objs is None, save an empty list
+The filename must be: <Class name>.json - example: Rectangle.json
+You must use the static method to_json_string (created before)
+You must overwrite the file if it already exists
+guillaume@ubuntu:~/$ cat 15-main.py
+#!/usr/bin/python3
+""" 15-main """
+from models.rectangle import Rectangle
+
+if __name__ == "__main__":
+
+    r1 = Rectangle(10, 7, 2, 8)
+    r2 = Rectangle(2, 4)
+    Rectangle.save_to_file([r1, r2])
+
+    with open("Rectangle.json", "r") as file:
+        print(file.read())
+
+guillaume@ubuntu:~/$ ./15-main.py
+[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7}, {"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]
+guillaume@ubuntu:~/$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0C-python-almost_a_circle
+File: models/base.py
+ 
+17. JSON string to dictionary
+mandatory
+Update the class Base by adding the static method def from_json_string(json_string): that returns the list of the JSON string representation json_string:
+
+json_string is a string representing a list of dictionaries
+If json_string is None or empty, return an empty list
+Otherwise, return the list represented by json_string
+guillaume@ubuntu:~/$ cat 16-main.py
+#!/usr/bin/python3
+""" 16-main """
+from models.rectangle import Rectangle
+
+if __name__ == "__main__":
+
+    list_input = [
+        {'id': 89, 'width': 10, 'height': 4}, 
+        {'id': 7, 'width': 1, 'height': 7}
+    ]
+    json_list_input = Rectangle.to_json_string(list_input)
+    list_output = Rectangle.from_json_string(json_list_input)
+    print("[{}] {}".format(type(list_input), list_input))
+    print("[{}] {}".format(type(json_list_input), json_list_input))
+    print("[{}] {}".format(type(list_output), list_output))
+
+guillaume@ubuntu:~/$ ./16-main.py
+[<class 'list'>] [{'height': 4, 'width': 10, 'id': 89}, {'height': 7, 'width': 1, 'id': 7}]
+[<class 'str'>] [{"height": 4, "width": 10, "id": 89}, {"height": 7, "width": 1, "id": 7}]
+[<class 'list'>] [{'height': 4, 'width': 10, 'id': 89}, {'height': 7, 'width': 1, 'id': 7}]
+guillaume@ubuntu:~/$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0C-python-almost_a_circle
+File: models/base.py
+ 
+18. Dictionary to Instance
+mandatory
+Update the class Base by adding the class method def create(cls, **dictionary): that returns an instance with all attributes already set:
+
+**dictionary can be thought of as a double pointer to a dictionary
+To use the update method to assign all attributes, you must create a “dummy” instance before:
+Create a Rectangle or Square instance with “dummy” mandatory attributes (width, height, size, etc.)
+Call update instance method to this “dummy” instance to apply your real values
+You must use the method def update(self, *args, **kwargs)
+**dictionary must be used as **kwargs of the method update
+You are not allowed to use eval
+guillaume@ubuntu:~/$ cat 17-main.py
+#!/usr/bin/python3
+""" 17-main """
+from models.rectangle import Rectangle
+
+if __name__ == "__main__":
+
+    r1 = Rectangle(3, 5, 1)
+    r1_dictionary = r1.to_dictionary()
+    r2 = Rectangle.create(**r1_dictionary)
+    print(r1)
+    print(r2)
+    print(r1 is r2)
+    print(r1 == r2)
+
+guillaume@ubuntu:~/$ ./17-main.py
+[Rectangle] (1) 1/0 - 3/5
+[Rectangle] (1) 1/0 - 3/5
+False
+False
+guillaume@ubuntu:~/$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0C-python-almost_a_circle
+File: models/base.py
+ 
+19. File to instances
+mandatory
+Update the class Base by adding the class method def load_from_file(cls): that returns a list of instances:
+
+The filename must be: <Class name>.json - example: Rectangle.json
+If the file doesn’t exist, return an empty list
+Otherwise, return a list of instances - the type of these instances depends on cls (current class using this method)
+You must use the from_json_string and create methods (implemented previously)
+guillaume@ubuntu:~/$ cat 18-main.py
+#!/usr/bin/python3
+""" 18-main """
+from models.rectangle import Rectangle
+from models.square import Square
+
+if __name__ == "__main__":
+
+    r1 = Rectangle(10, 7, 2, 8)
+    r2 = Rectangle(2, 4)
+    list_rectangles_input = [r1, r2]
+
+    Rectangle.save_to_file(list_rectangles_input)
+
+    list_rectangles_output = Rectangle.load_from_file()
+
+    for rect in list_rectangles_input:
+        print("[{}] {}".format(id(rect), rect))
+
+    print("---")
+
+    for rect in list_rectangles_output:
+        print("[{}] {}".format(id(rect), rect))
+
+    print("---")
+    print("---")
+
+    s1 = Square(5)
+    s2 = Square(7, 9, 1)
+    list_squares_input = [s1, s2]
+
+    Square.save_to_file(list_squares_input)
+
+    list_squares_output = Square.load_from_file()
+
+    for square in list_squares_input:
+        print("[{}] {}".format(id(square), square))
+
+    print("---")
+
+    for square in list_squares_output:
+        print("[{}] {}".format(id(square), square))
+
+guillaume@ubuntu:~/$ ./18-main.py
+[139785912033120] [Rectangle] (1) 2/8 - 10/7
+[139785912033176] [Rectangle] (2) 0/0 - 2/4
+---
+[139785911764752] [Rectangle] (1) 2/8 - 10/7
+[139785911764808] [Rectangle] (2) 0/0 - 2/4
+---
+---
+[139785912058040] [Square] (5) 0/0 - 5
+[139785912061848] [Square] (6) 9/1 - 7
+---
+[139785911764976] [Square] (5) 0/0 - 5
+[139785911765032] [Square] (6) 9/1 - 7
+guillaume@ubuntu:~/$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0C-python-almost_a_circle
+File: models/base.py
+ 
+

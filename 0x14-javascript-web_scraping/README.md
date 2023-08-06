@@ -27,4 +27,4 @@ b'Write a script that reads and prints the content of a file.'
 ### 9. Twitter Auth
 * b'Write a Javascript script that takes in 3 strings and sends a search request to the Twitter API'
 ## Author
-  * Maryann Unoarumi - Maryann529
+Olaide Olajide Hannah - Hollannah
